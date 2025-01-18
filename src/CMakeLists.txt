@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 #Project name and version number
-project(GREAT-PVT VERSION 0.1.0)
+project(GREAT-MSF VERSION 0.1.0)
 
 #information message
 message(STATUS " ====================================================================================================================== ")
@@ -20,7 +20,7 @@ message(STATUS " ===============================================================
 message(STATUS " The GREAT (GNSS+ Research, Application and Teaching) software is designed and developed at Wuhan University for        ")
 message(STATUS " scientific and engineering application and teaching in geodesy and navigation fields.                                     ")
 message(STATUS "                                                                                                                        ")
-message(STATUS " It is written in standard C++. GREAT-PVT supports multi-frequency multi-system PPP and RTK filtering solutions.        ")
+message(STATUS " It is written in standard C++. GREAT-MSF supports multi-frequency multi-system PPP and RTK filtering solutions.        ")
 
 message(STATUS " ====================================================================================================================== ")
 
@@ -95,10 +95,11 @@ message(STATUS "C++ compiler     is : ${CMAKE_CXX_COMPILER}")
 message(STATUS "Build directory  is : ${BUILD_DIR}")
 message(STATUS "The program main directory is : ${ROOT}")
 
+    
 
 # set lib name
 set(file_fold 
-    spdlog gexport gio gutils gcoders gmodels gall gdata gset pugixml gproc gprod gambfix newmat)
+    spdlog gexport gio gutils gcoders gmodels gall gdata gset pugixml gproc gprod gambfix newmat gins gmsf)
 message(${file_fold})
 set(PrintFile FALSE)
 
@@ -111,6 +112,10 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     if (NOT DEFINED Third_Eigen_ROOT)
         find_path(Third_Eigen_ROOT       HINTS "${Third_Eigen_ROOT}"        "$ENV{Third_Eigen_ROOT}            ")
     endif()
+
+    if (NOT DEFINED Third_GLFW_ROOT)
+        find_path(Third_GLFW_ROOT        HINTS "${Third_GLFW_ROOT}"         "$ENV{Third_GLFW_ROOT}         ")
+    endif()
     # ==============================================================================
 else()
     # For linux
@@ -119,16 +124,23 @@ else()
     if (NOT DEFINED Third_Eigen_ROOT)
         set(Third_Eigen_ROOT       ${ROOT}/third-party/Eigen)
     endif()
+
+    if (NOT DEFINED Third_GLFW_ROOT)
+        set(Third_GLFW_ROOT       ${ROOT}/third-party/GLFW)
+    endif()
     # ==============================================================================
 endif()
 
 # ========================================================================================================================================
 set(LibGnut          LibGnut)
 set(LibGREAT         LibGREAT)
+
 set(LibGnutSrc          ${PROJECT_SOURCE_DIR}/${LibGnut})
 set(LibGREATSrc         ${PROJECT_SOURCE_DIR}/${LibGREAT})
+
 add_subdirectory(${LibGnutSrc}       ${BUILD_DIR}/${LibGnut})
 add_subdirectory(${LibGREATSrc}      ${BUILD_DIR}/${LibGREAT})
+
 SET_PROPERTY(TARGET ${LibGnut}       PROPERTY FOLDER "LIB")
 SET_PROPERTY(TARGET ${LibGREAT}      PROPERTY FOLDER "LIB")
 

@@ -16,6 +16,9 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     if (NOT DEFINED Third_Eigen_ROOT)
         find_path(Third_Eigen_ROOT       HINTS "${Third_Eigen_ROOT}"        "$ENV{Third_Eigen_ROOT}            ")
     endif()
+    if (NOT DEFINED Third_GLFW_ROOT)
+        set(Third_GLFW_ROOT       ${ROOT}/third-party/GLFW)
+    endif()
     # ==============================================================================
 else()
     # For linux
@@ -24,11 +27,15 @@ else()
     if (NOT DEFINED Third_Eigen_ROOT)
         set(Third_Eigen_ROOT       ${ROOT}/third-party/Eigen)
     endif()
+    if (NOT DEFINED Third_GLFW_ROOT)
+        set(Third_GLFW_ROOT       ${ROOT}/third-party/GLFW)
+    endif()
     # ==============================================================================
 endif()
 
 # set include path
 include_directories(${Third_Eigen_ROOT})
+include_directories(${Third_GLFW_ROOT}/include)
 include_directories(${LibGnutSrc})
 include_directories(${LibGREATSrc})
 
@@ -92,17 +99,19 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     link_directories(${BUILD_DIR}/Lib/Release)
     link_directories(${BUILD_DIR}/Lib/RelWithDebInfo)
     link_directories(${BUILD_DIR}/Lib/MinSizeRel)
+	target_link_libraries(${PROJECT_NAME} ${Third_GLFW_ROOT}/lib/glfw3.lib opengl32.lib)
 else()
     link_directories(${BUILD_DIR}/Lib)
 endif()
 # ==========================================================================================================================================
-if(NOT Main_USE_AMODE_EXELIB)
-    target_link_libraries(${PROJECT_NAME} 
-        ${LibGnut})
-    add_dependencies(${PROJECT_NAME} 
-        ${LibGnut})
-endif()
+target_link_libraries(${PROJECT_NAME}    ${LibGnut})
+add_dependencies(${PROJECT_NAME}       ${LibGnut})
 
 set(pvt     GREAT_PVT)
 add_subdirectory(${ROOT}/app/${pvt}    ${BUILD_DIR}/${pvt})
 SET_PROPERTY(TARGET ${pvt}     PROPERTY FOLDER "app")
+
+set(msf       GREAT_MSF)
+add_subdirectory(${ROOT}/app/${msf}   ${BUILD_DIR}/${msf})
+SET_PROPERTY(TARGET ${msf}    PROPERTY FOLDER "app")
+

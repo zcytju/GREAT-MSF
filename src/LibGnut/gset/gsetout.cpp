@@ -40,6 +40,10 @@ namespace gnut
             return PPP_OUT;
         if (tmp == "FLT")
             return FLT_OUT;
+        if (tmp == "KML")
+            return KML_OUT;
+        if (tmp == "INS")
+            return INS_OUT;
         return OFMT(-1);
     }
 

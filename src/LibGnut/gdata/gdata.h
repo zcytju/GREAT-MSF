@@ -94,6 +94,8 @@ namespace gnut
             LEAPSECOND,  ///<   leap Second
             ALLPCVNEQ,   ///<   all PCV NEG
             RSSIMAP,     ///<   rssi map
+            IMUDATA,     ///< = xx, imu 
+
             LAST         ///<   last
         };
 

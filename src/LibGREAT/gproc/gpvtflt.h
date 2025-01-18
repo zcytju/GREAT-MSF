@@ -21,8 +21,6 @@
 #include "gproc/gpreproc.h"
 #include "gproc/gfltmatrix.h"
 
-using namespace gsins;
-
 namespace great
 {
     /**
@@ -233,7 +231,6 @@ namespace great
         * @param[in] saveProd   if save
         */
         virtual void _prtOut(t_gtime &epo, t_gallpar &X, const SymmetricMatrix &Q, vector<t_gsatdata> &data, ostringstream &os, xml_node &node, bool saveProd = true);
-        virtual void _prt_port(t_gtime &epo, t_gallpar &X, const SymmetricMatrix &Q, vector<t_gsatdata> &data);
 
         /** @brief print  the result. */
         void _prtOutHeader();
@@ -329,6 +326,11 @@ namespace great
         void _posterioriTest(const Matrix& A, const SymmetricMatrix& P, const ColumnVector& l,
             const ColumnVector& dx, const SymmetricMatrix& Q, ColumnVector& v_norm, double& vtpv);
 
+        virtual bool _external_pos(const t_gtriple& xyz_r, const t_gtriple& rms);
+
+        void _get_result(t_gtime& epo, t_gposdata::data_pos& pos);
+
+
     protected:
         t_whitenoise *_dclkStoModel;       ///< clock drift model
         t_whitenoise *_velStoModel;        ///< velocity model
@@ -372,8 +374,10 @@ namespace great
         int _realnobs;                    ///< number of obs
         RECEIVERTYPE _receiverType;       ///< receiver Type
         map<string, string> _sat_freqs;   ///< sat freqs
-    };
 
+        t_gtriple _extn_pos, _extn_rms; // external position and its rms
+        bool _pos_constrain;
+    };
 }
 
 #endif

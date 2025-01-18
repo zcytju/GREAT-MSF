@@ -11,18 +11,18 @@
 #include "gposdata.h"
 #include "gutils/gtypeconv.h"
 
-gsins::t_gposdata::t_gposdata()
+great::t_gposdata::t_gposdata()
 {
     id_type(LCI_POS);
     _ptr = 0;
 }
-gsins::t_gposdata::t_gposdata(t_spdlog spdlog) : t_gdata(spdlog)
+great::t_gposdata::t_gposdata(t_spdlog spdlog) : t_gdata(spdlog)
 {
     id_type(LCI_POS);
     _ptr = 0;
 }
 
-gsins::t_gposdata::~t_gposdata()
+great::t_gposdata::~t_gposdata()
 {
 }
 

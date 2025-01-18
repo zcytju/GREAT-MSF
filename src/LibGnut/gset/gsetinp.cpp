@@ -55,6 +55,8 @@ namespace gnut
             return IFMT::UPD_INP;
         if (tmp == "IFCB")
             return IFMT::IFCB_INP;
+        if (tmp == "IMU")
+            return IFMT::IMU_INP; 
 
         string message = "The Type : " + tmp + " is not support, check your xml";
         spdlog::warn(message);

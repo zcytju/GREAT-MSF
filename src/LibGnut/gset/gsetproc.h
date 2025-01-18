@@ -357,6 +357,7 @@ namespace gnut
         bool _sd_sat;                   ///< single differented between sat and sat_ref
         modeofmeanpole _meanpolemodel;  ///< different mean pole modeling
 
+
     private:
     };
 

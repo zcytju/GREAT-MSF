@@ -47,7 +47,9 @@ namespace gnut
         XXX_OUT,
         LOG_OUT,
         PPP_OUT,
-        FLT_OUT
+        FLT_OUT,
+        KML_OUT,
+        INS_OUT
     };
 
     class LibGnut_LIBRARY_EXPORT t_gsetout : public virtual t_gsetbase
@@ -138,6 +140,8 @@ namespace gnut
          * @return string : string output version
          */
         string version(const string &fmt);
+
+
 
     protected:
         /**

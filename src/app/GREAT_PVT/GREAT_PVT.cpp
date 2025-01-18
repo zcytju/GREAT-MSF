@@ -4,8 +4,6 @@
 #include <thread>
 
 using namespace std;
-using namespace gnut;
-using namespace gsins;
 using namespace std::chrono;
 
 void catch_signal(int) { cout << "Program interrupted by Ctrl-C [SIGINT,2]\n"; }

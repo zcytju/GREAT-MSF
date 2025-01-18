@@ -1437,7 +1437,7 @@ int great::t_gpvtflt::_processEpoch(const t_gtime &runEpoch)
         }
 
         Qsav = _Qx;
-
+        
         try
         {
             _filter->update(A, P, l, dx, _Qx);
@@ -1614,8 +1614,6 @@ int great::t_gpvtflt::_amb_resolution()
     {
         _param_fixed = _ambfix->getFinalParams();
         _prtOut(_epoch, _param_fixed, _filter->Qx(), _data, os, line, true);
-        _prt_port(_epoch, _param_fixed, _filter->Qx(), _data);
-        cout << _epoch.str_ymdhms() << endl;
 	}
     else
     {
@@ -1624,7 +1622,6 @@ int great::t_gpvtflt::_amb_resolution()
             _param_fixed[iPar].value(_param_fixed[iPar].value() + dx_tmp(_param_fixed[iPar].index));
         }
         _prtOut(_epoch, _param_fixed, Qx_tmp, _data, os, line, true);
-        _prt_port(_epoch, _param_fixed, Qx_tmp, _data);
     }
 
     // Print flt results
@@ -2871,7 +2868,7 @@ void great::t_gpvtflt::_prtOut(t_gtime &epoch, t_gallpar &X, const SymmetricMatr
     t_gposdata::data_pos posdata = t_gposdata::data_pos{ crt, position, velocity, Qpos, Qvel, pdop, nsat, _amb_state };
     bool ins = dynamic_cast<t_gsetinp *>(_set)->input_size("imu") > 0 ? true : false;
     // write kml
-    if (_kml)
+    if (_kml&&!ins)
     {
         ostringstream out;
         t_gtriple ell1(ell);
@@ -2957,103 +2954,6 @@ void great::t_gpvtflt::_prtOut(t_gtime &epoch, t_gallpar &X, const SymmetricMatr
     os << endl;
 
     return;
-}
-
-void great::t_gpvtflt::_prt_port(t_gtime &epoch, t_gallpar &X, const SymmetricMatrix &Q, vector<t_gsatdata> &data)
-{
-
-    ostringstream os;
-    // get CRD params
-    t_gtriple xyz, ell;
-    X.getCrdParam(_site, xyz);
-    if (_crd_est == CONSTRPAR::FIX)
-    {
-        shared_ptr<t_gobj> grec = _gallobj->obj(_site);
-        xyz = grec->crd_arp(epoch);
-    }
-    xyz2ell(xyz, ell, false);
-
-    // CRD using eccentricities
-    t_gtriple xyz_ecc = xyz - _grec->eccxyz(epoch); // MARKER + ECC = ARP
-
-    double Xrms = 0.0, Yrms = 0.0, Zrms = 0.0;
-    int icrdx = _param.getParam(_site, par_type::CRD_X, "");
-    int icrdy = _param.getParam(_site, par_type::CRD_Y, "");
-    int icrdz = _param.getParam(_site, par_type::CRD_Z, "");
-    if (icrdx >= 0 && icrdy >= 0 && icrdz >= 0)
-    {
-        if (Q(icrdx + 1, icrdx + 1) < 0)
-            Xrms = -1;
-        else
-            Xrms = sqrt(Q(icrdx + 1, icrdx + 1));
-        if (Q(icrdy + 1, icrdy + 1) < 0)
-            Yrms = -1;
-        else
-            Yrms = sqrt(Q(icrdy + 1, icrdy + 1));
-        if (Q(icrdz + 1, icrdz + 1) < 0)
-            Zrms = -1;
-        else
-            Zrms = sqrt(Q(icrdz + 1, icrdz + 1));
-    }
-
-    t_gtriple crd_rms(Xrms, Yrms, Zrms);
-    t_gtriple vRec(0, 0, 0);
-    if (_doppler)
-    {
-        vRec = _vel;
-    }
-    else
-    {
-        vRec = t_gtriple(0.0, 0.0, 0.0);
-    }
-
-    set<string> sat_list;
-    for (auto it = _data.begin(); it != _data.end(); it++)
-        sat_list.insert(it->sat());
-    _dop.set_sats(sat_list);
-    double pdop = -1;
-    if (_dop.calculate(epoch, xyz) >= 0)
-        pdop = _dop.pdop();
-
-    set<string> ambs = X.amb_prns();
-    int nsat = ambs.size();
-
-    // get amb status
-    string amb = "Float";
-    if (_amb_state)
-        amb = "Fixed";
-
-    t_gtriple blh;
-    xyz2ell(xyz_ecc, blh, true);
-
-    string str_dsec = dbl2str(epoch.dsec());
-
-    if (_isBase)
-    {
-        auto crd_base = _gallobj->obj(_site_base)->crd_arp(epoch);
-        t_gtriple tmpell, tmpdxyz, tmpneu;
-        xyz2ell(crd_base, tmpell, false);
-        tmpdxyz = xyz - crd_base;
-        xyz2neu(tmpell, tmpdxyz, tmpneu);
-    }
-
-    os << fixed << setprecision(4) << " "
-       << " " << epoch.sow() + epoch.dsec()
-       << fixed << setprecision(4)
-       << " " << setw(15) << xyz_ecc[0] // [m]
-       << " " << setw(15) << xyz_ecc[1] // [m]
-       << " " << setw(15) << xyz_ecc[2] // [m]
-       << " " << setw(10) << vRec[0]    // [m/s]
-       << " " << setw(10) << vRec[1]    // [m/s]
-       << " " << setw(10) << vRec[2]    // [m/s]
-       << fixed << setprecision(0)
-       << " " << setw(5) << nsat // nsat
-       << fixed << setprecision(2)
-       << " " << setw(5) << pdop // pdop
-       << fixed << setprecision(2)
-       << " " << setw(8) << amb
-       << setw(10) << (_amb_state ? _ambfix->get_ratio() : 0.0)
-       << endl;
 }
 
 void great::t_gpvtflt::_prtOutHeader()
@@ -3390,6 +3290,19 @@ bool great::t_gpvtflt::_cmp_rec_crd(const string& ssite, Matrix& BB)
         _vBanc(3) = grec->crd_arp(_epoch)[2];
     }
 
+    if (ssite == _site && _crd_est != CONSTRPAR::FIX)
+    {
+        if (_pos_constrain)
+        {
+            _vBanc(1) = _extn_pos[0];
+            _vBanc(2) = _extn_pos[1];
+            _vBanc(3) = _extn_pos[2];
+            int iclk = _param.getParam(_site, par_type::CLK, "");
+            if (BB.Nrows() < 4)
+                _vBanc(4) = _param[iclk].value();
+        }
+    }
+
     else if (ssite == _site_base && dynamic_cast<t_gsetproc*>(_set)->basepos() == BASEPOS::CFILE)
     {
         _vBanc(1) = grec->crd_arp(_epoch)[0];
@@ -3526,7 +3439,7 @@ void great::t_gpvtflt::_predictCrd()
             if (_pos_kin)
                 _param[i].value(_vBanc(1));
             if (_cntrep == 1 && _success)
-                _Qx(i + 1, i + 1) += _crdStoModel->getQ() * _crdStoModel->getQ();
+                _Qx(i + 1, i + 1) += _crdStoModel->getQ() * _crdStoModel->getQ(); 
         }
     }
 
@@ -3561,6 +3474,14 @@ void great::t_gpvtflt::_predictCrd()
                 _param[i].value(_vBanc(3));
             if (_cntrep == 1 && _success)
                 _Qx(i + 1, i + 1) += _crdStoModel->getQ() * _crdStoModel->getQ();
+        }
+    }
+    if (_pos_constrain)
+    {
+        int icrdx = _param.getParam(_site, par_type::CRD_X, "");
+        for (int j = 0; j < 3; j++)
+        {
+            _Qx(_param[icrdx].index + j, _param[icrdx].index + j) = SQR(_extn_rms[j]);
         }
     }
 
@@ -3994,3 +3915,91 @@ void great::t_gpvtflt::_posterioriTest(const Matrix& A, const SymmetricMatrix& P
     return;
 }
 
+bool great::t_gpvtflt::_external_pos(const t_gtriple& xyz_r, const t_gtriple& rms)
+{
+    _extn_pos = xyz_r;
+    _extn_rms = rms;
+    _pos_constrain = true;
+    return true;
+}
+
+void great::t_gpvtflt::_get_result(t_gtime& epoch, t_gposdata::data_pos& pos)
+{
+
+    double crt = epoch.sow() + epoch.dsec();
+    t_gallpar X = _param_fixed;
+    SymmetricMatrix Qx;
+    if (_amb_state) Qx = _filter->Qx();
+    else Qx = _Qx;
+    // get CRD params
+    t_gtriple xyz, xyz_ecc;
+    // get CRD rms  (XYZ)
+    double Xrms = 0.0, Yrms = 0.0, Zrms = 0.0,
+        Vxrms = 0.0, Vyrms = 0.0, Vzrms = 0.0;
+
+    if (X.getCrdParam(_site, xyz) > 0)
+    {
+        // CRD using eccentricities
+        xyz_ecc = xyz - _grec->eccxyz(epoch); // MARKER + ECC = ARP
+
+        int icrdx = _param.getParam(_site, par_type::CRD_X, "");
+        int icrdy = _param.getParam(_site, par_type::CRD_Y, "");
+        int icrdz = _param.getParam(_site, par_type::CRD_Z, "");
+        if (Qx(icrdx + 1, icrdx + 1) < 0)
+            Xrms = -1;
+        else
+            Xrms = sqrt(Qx(icrdx + 1, icrdx + 1));
+        if (Qx(icrdy + 1, icrdy + 1) < 0)
+            Yrms = -1;
+        else
+            Yrms = sqrt(Qx(icrdy + 1, icrdy + 1));
+        if (Qx(icrdz + 1, icrdz + 1) < 0)
+            Zrms = -1;
+        else
+            Zrms = sqrt(Qx(icrdz + 1, icrdz + 1));
+    }
+    else
+    {
+        xyz_ecc = _grec->crd_arp(epoch);
+        Xrms = Yrms = Zrms = 30;
+    }
+    // get VEL rms
+    t_gtriple vRec(0, 0, 0);
+    if (_doppler)
+    {
+        vRec = _vel;
+        if (_Qx_vel(1, 1) < 0)
+            Vxrms = -1;
+        else
+            Vxrms = sqrt(_Qx_vel(1, 1));
+        if (_Qx_vel(2, 2) < 0)
+            Vyrms = -1;
+        else
+            Vyrms = sqrt(_Qx_vel(2, 2));
+        if (_Qx_vel(3, 3) < 0)
+            Vzrms = -1;
+        else
+            Vzrms = sqrt(_Qx_vel(3, 3));
+    }
+    else
+    {
+        vRec = t_gtriple(0.0, 0.0, 0.0);
+        Vxrms = Vyrms = Vzrms = 0;
+    }
+
+    set<string> sat_list;
+    for (auto it = _data.begin(); it != _data.end(); it++)
+        sat_list.insert(it->sat());
+    _dop.set_sats(sat_list);
+    double pdop = -1;
+    if (_dop.calculate(epoch, xyz) >= 0)
+        pdop = _dop.pdop();
+
+    set<string> ambs = X.amb_prns();
+    int nsat = ambs.size();
+
+    Eigen::Vector3d Qpos(Xrms * Xrms, Yrms * Yrms, Zrms * Zrms), Qvel(Vxrms * Vxrms, Vyrms * Vyrms, Vzrms * Vzrms);
+    Eigen::Vector3d position(xyz_ecc[0], xyz_ecc[1], xyz_ecc[2]), velocity(vRec[0], vRec[1], vRec[2]);
+
+    pos = t_gposdata::data_pos{ crt, position, velocity, Qpos, Qvel, pdop, nsat, _amb_state, _sig_unit };
+}

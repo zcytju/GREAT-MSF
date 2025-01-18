@@ -22,7 +22,6 @@ using namespace std;
 using namespace gnut;
 namespace great
 {
-
     /**
     * @brief  Matrix for storage observe equations of B,P,L
     */

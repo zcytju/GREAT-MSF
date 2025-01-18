@@ -172,6 +172,10 @@ namespace gnut
         case LAST:
             str = "UNDEF";
             break;
+        case IMUDATA:
+            str = "IMUDATA";
+            break;
+
         default:
             str = "UNDEF";
         }

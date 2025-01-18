@@ -96,6 +96,27 @@ namespace gnut
         VEL_Y,
         VEL_Z, ///< velocity
         CLK_RAT, ///< satellite clock speed
+
+        ATT_X,
+        ATT_Y,
+        ATT_Z,
+        eb_X,
+        eb_Y,
+        eb_Z,
+        db_X,
+        db_Y,
+        db_Z,
+        gyro_scale_X, ///< gyro scale factor
+        gyro_scale_Y,
+        gyro_scale_Z,
+        acce_scale_X, ///< acce scale factor
+        acce_scale_Y,
+        acce_scale_Z,
+        IMU_INST_ATT_X, ///< imu installation angle
+        IMU_INST_ATT_Y,
+        IMU_INST_ATT_Z,
+        ODO_k,
+        
         NO_DEF
     };
 

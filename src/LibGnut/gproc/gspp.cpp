@@ -260,12 +260,12 @@ namespace gnut
             if (mode != "")
                 tmp = tmp + "-" + mode;
 
-            auto log_type = dynamic_cast<t_gsetout*>(_set)->log_type();
-            auto log_level = dynamic_cast<t_gsetout*>(_set)->log_level();
-            auto log_name = dynamic_cast<t_gsetout*>(_set)->log_name();
-            _grtlog.set_log(log_type, log_level, log_name);
-            _spdlog = _grtlog.spdlog();
         }
+        auto log_type = dynamic_cast<t_gsetout*>(_set)->log_type();
+        auto log_level = dynamic_cast<t_gsetout*>(_set)->log_level();
+        auto log_name = dynamic_cast<t_gsetout*>(_set)->log_name();
+        _grtlog.set_log(log_type, log_level, log_name);
+        _spdlog = _grtlog.spdlog();
     }
 
 } // namespace

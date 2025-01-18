@@ -23,25 +23,26 @@ namespace gnut
     {
         t_map_sats m;
         // (string) necessary for VS2013
-        m[GPS] = {(string) "G01", (string) "G02", (string) "G03", (string) "G04", (string) "G05", (string) "G06", (string) "G07", (string) "G08", (string) "G09", (string) "G10",
-                  (string) "G11", (string) "G12", (string) "G13", (string) "G14", (string) "G15", (string) "G16", (string) "G17", (string) "G18", (string) "G19", (string) "G20",
-                  (string) "G21", (string) "G22", (string) "G23", (string) "G24", (string) "G25", (string) "G26", (string) "G27", (string) "G28", (string) "G29", (string) "G30",
-                  (string) "G31", (string) "G32"};
+        m[GPS] = { (string)"G01", (string)"G02", (string)"G03", (string)"G04", (string)"G05", (string)"G06", (string)"G07", (string)"G08", (string)"G09", (string)"G10",
+                  (string)"G11", (string)"G12", (string)"G13", (string)"G14", (string)"G15", (string)"G16", (string)"G17", (string)"G18", (string)"G19", (string)"G20",
+                  (string)"G21", (string)"G22", (string)"G23", (string)"G24", (string)"G25", (string)"G26", (string)"G27", (string)"G28", (string)"G29", (string)"G30",
+                  (string)"G31", (string)"G32" };
 
-        m[GLO] = {(string) "R01", (string) "R02", (string) "R03", (string) "R04", (string) "R05", (string) "R06", (string) "R07", (string) "R08", (string) "R09", (string) "R10",
-                  (string) "R11", (string) "R12", (string) "R13", (string) "R14", (string) "R15", (string) "R16", (string) "R17", (string) "R18", (string) "R19", (string) "R20",
-                  (string) "R21", (string) "R22", (string) "R23", (string) "R24"};
+        m[GLO] = { (string)"R01", (string)"R02", (string)"R03", (string)"R04", (string)"R05", (string)"R06", (string)"R07", (string)"R08", (string)"R09", (string)"R10",
+                  (string)"R11", (string)"R12", (string)"R13", (string)"R14", (string)"R15", (string)"R16", (string)"R17", (string)"R18", (string)"R19", (string)"R20",
+                  (string)"R21", (string)"R22", (string)"R23", (string)"R24" };
 
-        m[GAL] = {(string) "E01", (string) "E02", (string) "E03", (string) "E04", (string) "E05", (string) "E06", (string) "E07", (string) "E08", (string) "E09", (string) "E10",
-                  (string) "E11", (string) "E12", (string) "E13", (string) "E14", (string) "E15", (string) "E16", (string) "E17", (string) "E18", (string) "E19", (string) "E20",
-                  (string) "E21", (string) "E22", (string) "E23", (string) "E24", (string) "E25", (string) "E26", (string) "E27", (string) "E28", (string) "E29", (string) "E30",
-                  (string) "E31", (string) "E32", (string) "E33", (string) "E34", (string) "E35", (string) "E36"};
+        m[GAL] = { (string)"E01", (string)"E02", (string)"E03", (string)"E04", (string)"E05", (string)"E06", (string)"E07", (string)"E08", (string)"E09", (string)"E10",
+                  (string)"E11", (string)"E12", (string)"E13", (string)"E14", (string)"E15", (string)"E16", (string)"E17", (string)"E18", (string)"E19", (string)"E20",
+                  (string)"E21", (string)"E22", (string)"E23", (string)"E24", (string)"E25", (string)"E26", (string)"E27", (string)"E28", (string)"E29", (string)"E30",
+                  (string)"E31", (string)"E32", (string)"E33", (string)"E34", (string)"E35", (string)"E36" };
 
-        m[BDS] = {(string) "C01", (string) "C02", (string) "C03", (string) "C04", (string) "C05", (string) "C06", (string) "C07", (string) "C08", (string) "C09", (string) "C10",
-                  (string) "C11", (string) "C12", (string) "C13", (string) "C14", (string) "C15", (string) "C16", (string) "C17", (string) "C18", (string) "C19", (string) "C20",
-                  (string) "C21", (string) "C22", (string) "C23", (string) "C24", (string) "C25", (string) "C26", (string) "C27", (string) "C28", (string) "C29", (string) "C30",
-                  (string) "C31", (string) "C32", (string) "C33", (string) "C34", (string) "C35", (string) "C36", (string) "C37", (string) "C38", (string) "C39", (string) "C40",
-                  (string) "C41", (string) "C42", (string) "C43", (string) "C44", (string) "C45", (string) "C46", (string) "C59", (string) "C60"};
+        m[BDS] = { (string)"C01", (string)"C02", (string)"C03", (string)"C04", (string)"C05", (string)"C06", (string)"C07", (string)"C08", (string)"C09", (string)"C10",
+                  (string)"C11", (string)"C12", (string)"C13", (string)"C14", (string)"C15", (string)"C16", (string)"C17", (string)"C18", (string)"C19", (string)"C20",
+                  (string)"C21", (string)"C22", (string)"C23", (string)"C24", (string)"C25", (string)"C26", (string)"C27", (string)"C28", (string)"C29", (string)"C30",
+                  (string)"C31", (string)"C32", (string)"C33", (string)"C34", (string)"C35", (string)"C36", (string)"C37", (string)"C38", (string)"C39", (string)"C40",
+                  (string)"C41", (string)"C42", (string)"C43", (string)"C44", (string)"C45", (string)"C46", (string)"C47", (string)"C48", (string)"C49", (string)"C50",
+                  (string)"C56", (string)"C57", (string)"C58", (string)"C59", (string)"C60", (string)"C61", (string)"C62" };
 
         m[SBS] = {(string) "S20", (string) "S24", (string) "S25", (string) "S26", (string) "S27", (string) "S28", (string) "S29",
                   (string) "S33", (string) "S35", (string) "S36", (string) "S37", (string) "S38",

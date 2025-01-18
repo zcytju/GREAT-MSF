@@ -17,7 +17,7 @@
 #include <newmat/newmat.h>
 using namespace gnut;
 
-namespace gsins
+namespace great
 {
     /**
     *@brief t_gposdata Class for storing the pos data

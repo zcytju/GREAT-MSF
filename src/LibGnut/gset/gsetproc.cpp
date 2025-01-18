@@ -21,7 +21,6 @@
 #include "gutils/gmutex.h"
 
 
-
 using namespace std;
 using namespace pugi;
 
@@ -1239,5 +1238,4 @@ namespace gnut
             return RECEIVERTYPE::DEF;
         }
     }
-
 } // namespace

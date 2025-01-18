@@ -300,6 +300,7 @@ namespace gnut
         bool _clksp3;             ///< true: use alternatively clk from sp3 (~15min!)
         bool _clknav;             ///< true: use alternatively nav (low-precise clocks)
         bool _posnav;             ///< true: use alternatively nav (low-precise orbits)
+
         map<string, int> _intvm;
         string _agency;
         t_gtime _tbeg;

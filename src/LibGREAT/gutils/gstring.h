@@ -18,4 +18,6 @@ namespace great
 {
     /** @brief string format. */
     LibGREAT_LIBRARY_EXPORT std::string format(const char *fmt, ...);
+
+    LibGREAT_LIBRARY_EXPORT void split(const std::string& s, std::string delim, std::vector<std::string>& ret);
 }

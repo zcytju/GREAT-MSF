@@ -474,4 +474,46 @@ namespace gnut
         return 1;
     }
 
+    t_gtime t_gallobs::load(const string& site, const double& t)
+    {
+        vector<t_gtime>::const_iterator it = _allepoches.begin();
+        it = upper_bound(_allepoches.begin(), _allepoches.end(), t);
+        if (it == _allepoches.end() || it == _allepoches.begin())
+            return t_gtime(0.0);
+        vector<t_gtime>::const_iterator it_up = it, it_low = --it;
+        t_gtime crt(it->gwk(), t);
+        if (fabs(crt.diff(*it_low)) < fabs(crt.diff(*it_up)))
+            return *it_low;
+        else
+            return *it_up;
+    }
+
+    void t_gallobs::erase(const string& site, const t_gtime& t)
+    {
+
+#ifdef BMUTEX
+        boost::mutex::scoped_lock lock(_mutex);
+#endif
+        _gmutex.lock();
+        double range = 30 * 60;
+        t_map_oref::iterator itFirst = _mapobj[site].begin();
+        t_map_oref::iterator itEnd = _mapobj[site].lower_bound(t - range);
+        if (itEnd == itFirst)
+        {
+            _gmutex.unlock();
+            return;
+        }
+        else
+            itEnd--;
+        if (fabs(itFirst->first.diff(t)) > range) //modified by liyuhao,only in pce
+            _mapobj[site].erase(itFirst, itEnd);
+        //_mapobj[site].erase(t);
+        _gmutex.unlock();
+    }
+
+    void t_gallobs::setepoches(const string& site)
+    {
+        _allepoches = epochs(site);
+    }
+
 } // namespace

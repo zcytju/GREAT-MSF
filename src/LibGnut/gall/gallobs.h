@@ -232,16 +232,40 @@ namespace gnut
         const map<string, int> &glo_freq_num() const { return _glofrq; }
 
         /**
-         * @brief add glo freq
-         * 
-         * @param sat 
-         * @param freqNum 
-         */
+          * @brief add glo freq
+          * 
+          * @param sat 
+          * @param freqNum 
+          */
         void add_glo_freq(const string &sat, int freqNum)
         {
             if (_glofrq.find(sat) == _glofrq.end())
                 _glofrq[sat] = freqNum;
         }
+
+        /**
+        * @brief
+        *
+        * @param site
+        * @param t
+        * @return t_gtime
+        */
+        virtual t_gtime load(const string& site, const double& t); 
+
+        /**
+         * @brief
+         *
+         * @param site
+         * @param t
+         */
+        virtual void erase(const string& site, const t_gtime& t); 
+
+        /**
+         * @brief
+         *
+         * @param site
+         */
+        void setepoches(const string& site); // acquire all epoches
 
     protected:
         /**@brief return all sats */
@@ -265,6 +289,8 @@ namespace gnut
         map<string, t_gtriple> _mapcrds; ///< all sites apr coordinates 
         map<string, int> _glofrq;        ///< map of GLONASS slot/frequency 
         set<string> _map_sites;          ///< map of sites 
+
+        vector<t_gtime> _allepoches;     ///< all epoches
     private:
     };
 

@@ -901,6 +901,8 @@ namespace gnut
         geo.insert("C05");
         geo.insert("C59");
         geo.insert("C60");
+        geo.insert("C61");
+        geo.insert("C62");
         if (geo.find(sat) != geo.end())
             return true;
 
@@ -931,6 +933,7 @@ namespace gnut
         cys.insert("C38"); // all BDS-3 IGSO by CAST; 3 satellites
         cys.insert("C39");
         cys.insert("C40");
+
         if (cys.find(sat) != cys.end())
             return true;
         return false;
@@ -949,6 +952,10 @@ namespace gnut
         cys.insert("C35");
         cys.insert("C43");
         cys.insert("C44");
+
+        cys.insert("C47");
+        cys.insert("C49");
+
         if (cys.find(sat) != cys.end())
             return true;
 

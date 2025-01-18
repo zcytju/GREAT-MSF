@@ -53,6 +53,7 @@ namespace gnut
         RINEXO_INP,     ///< rinexo file
         SP3_INP,        ///< SP3 file
         UPD_INP,        ///< upd file
+        IMU_INP,     ///< imu file for inertial navigation system (by zhshen)
         UNDEF = -1
     };
 

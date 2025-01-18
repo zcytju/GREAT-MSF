@@ -288,6 +288,7 @@ namespace gnut
         map<GSYS, set<string>> _nav; ///< default navigation messages
 
         //    ENCODING
+        int _fill_buffer(char* buff, int sz);
         stringstream _ss;
         long _ss_position;
         bool _hdr;
