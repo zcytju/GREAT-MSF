@@ -1,5 +1,5 @@
-#Minimum requirement of CMake version : 3.0.0
-cmake_minimum_required(VERSION 3.0.0)
+#Minimum requirement of CMake version : 3.20.0
+cmake_minimum_required(VERSION 3.20.0)
 
 #Project name and version number
 project(${LibGnut} VERSION 0.1.0)
@@ -32,7 +32,7 @@ include_directories(${Third_Eigen_ROOT})
 include_directories(${LibGnutSrc})
 
 #message(STATUS "                                                                     ")
-message(STATUS " include path for ${LibGnut} is : ${Third_Eigen_ROOT}")
+message(STATUS " include path for Eigen is : ${Third_Eigen_ROOT}")
 message(STATUS " include path for ${LibGnut} is : ${LibGnutSrc}")
 #message(STATUS "                                                                     ")
 
@@ -92,7 +92,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     link_directories(${BUILD_DIR}/Lib/RelWithDebInfo)
     link_directories(${BUILD_DIR}/Lib/MinSizeRel)
 else()
-    link_directories(${BUILD_DIR}/Lib)
+    link_directories(${BUILD_DIR}/lib)
     target_link_libraries(${PROJECT_NAME} z)
 endif()
 # ==========================================================================================================================================

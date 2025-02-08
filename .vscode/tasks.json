@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "CMake Configure",
+		"type": "shell",
+		"command": "cmake",
+		"options": {
+		  "cwd": "${workspaceFolder}/build"
+		},
+		"args": [
+		  "-DCMAKE_BUILD_TYPE=Debug",
+		  "../src"
+		],
+		"group": {
+		  "kind": "build",
+		  "isDefault": false
+		},
+		"problemMatcher": []
+	  },
+	  {
+		"label": "CMake Build",
+		"type": "shell",
+		"command": "cmake",
+		"options": {
+		  "cwd": "${workspaceFolder}/build"
+		},
+		"args": [
+		  "--build",
+		  ".",
+		  "-j4",  // 添加 -j 选项
+		],
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
+		},
+		"problemMatcher": []
+	  }
+	]
+  }

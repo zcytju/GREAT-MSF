@@ -1,19 +1,19 @@
-#Minimum requirement of CMake version : 3.0.0
-cmake_minimum_required(VERSION 3.0.0)
+# Minimum requirement of CMake version : 3.20.0
+cmake_minimum_required(VERSION 3.20.0)
 
-#Project name and version number
+# Project name and version number
 project(GREAT-MSF VERSION 0.1.0)
 
-#information message
-message(STATUS " ====================================================================================================================== ")
+# information message
+# message(STATUS " ====================================================================================================================== ")
 
-message(STATUS "    .oooooo.    ooooooooo.   oooooooooooo       .o.       ooooooooooooo")
-message(STATUS "   d8P'  `Y8b   `888   `Y88. `888'     `8      .888.      8'   888   `8")
-message(STATUS "  888            888   .d88'  888             .8\"888.         888     ")
-message(STATUS "  888            888ooo88P'   888oooo8       .8' `888.         888     ")
-message(STATUS "  888     ooooo  888`88b.     888    \"      .88ooo8888.       888     ")
-message(STATUS "  `88.    .88'   888  `88b.   888       o  .8'     `888.       888     ")
-message(STATUS "   `Y8bood8P'   o888o  o888o o888ooooood8 o88o     o8888o     o888o    ")
+# message(STATUS "    .oooooo.    ooooooooo.   oooooooooooo       .o.       ooooooooooooo")
+# message(STATUS "   d8P'  `Y8b   `888   `Y88. `888'     `8      .888.      8'   888   `8")
+# message(STATUS "  888            888   .d88'  888             .8\"888.         888     ")
+# message(STATUS "  888            888ooo88P'   888oooo8       .8' `888.         888     ")
+# message(STATUS "  888     ooooo  888`88b.     888    \"      .88ooo8888.       888     ")
+# message(STATUS "  `88.    .88'   888  `88b.   888       o  .8'     `888.       888     ")
+# message(STATUS "   `Y8bood8P'   o888o  o888o o888ooooood8 o88o     o8888o     o888o    ")
 
 message(STATUS " ====================================================================================================================== ")
 
@@ -39,8 +39,8 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     add_compile_options(-Wall)
     add_compile_options(-w)
     SET(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}_Linux)
-    SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
-    SET(CMAKE_INSTALL_RPATH "\${ORIGIN}/../Lib") 
+    # SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
+    # SET(CMAKE_INSTALL_RPATH "\${ORIGIN}/../Lib") 
 elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     SET(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}_Darwin)
     add_compile_options(-pthread)
@@ -76,10 +76,10 @@ endif()
 
 # Set the ROOT and subdirectory, you should put the CMakeList.txt in these file directories
 set(ROOT ${PROJECT_SOURCE_DIR})
-set(EXECUTABLE_OUTPUT_PATH ${BUILD_DIR}/Bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR}/Bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BUILD_DIR}/Lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BUILD_DIR}/Lib)
+# set(EXECUTABLE_OUTPUT_PATH ${BUILD_DIR}/Bin)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR}/Bin)
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BUILD_DIR}/Lib)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BUILD_DIR}/Lib)
 
 set(CMAKE_DEBUG_POSTFIX "d")
 set(CMAKE_RELEASE_POSTFIX "")
@@ -132,6 +132,9 @@ else()
 endif()
 
 # ========================================================================================================================================
+find_package(OpenGL REQUIRED)
+find_package(glfw3 REQUIRED)
+
 set(LibGnut          LibGnut)
 set(LibGREAT         LibGREAT)
 

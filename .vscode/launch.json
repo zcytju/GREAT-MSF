@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug C/C++ Program",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/bin/GREAT_MSF",
+        "args": [
+            "-x",
+            "${workspaceFolder}/sample_data/MSF_20201029/xml/GREAT_MSF_LCPPP_1029.xml"
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}/sample_data/MSF_20201029",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "preLaunchTask": "CMake Build",
+        "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "logging": {
+        "moduleLoad": false,
+        "trace": false,
+        "engineLogging": false,
+        "programOutput": true,
+        "exceptions": false
+      }
+      }
+    ]
+  }

@@ -1,5 +1,5 @@
-﻿#Minimum requirement of CMake version : 3.0.0
-cmake_minimum_required(VERSION 3.0.0)
+﻿#Minimum requirement of CMake version : 3.20.0
+cmake_minimum_required(VERSION 3.20.0)
 
 #Project name and version number
 project(${msf})
@@ -33,17 +33,17 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     link_directories(${link_path})
 else()
     set(link_path
-        ${BUILD_DIR}/Lib)
+        ${BUILD_DIR}/lib)
     link_directories(${link_path})
 endif()
 
 set(lib_list 
     ${LibGnut}
     ${LibGREAT})
-    
-target_link_libraries(${PROJECT_NAME} ${lib_list})
 
 add_dependencies(${PROJECT_NAME} ${lib_list})
+    
+target_link_libraries(${PROJECT_NAME} ${lib_list})
 
 
 
