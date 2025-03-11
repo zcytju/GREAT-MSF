@@ -353,7 +353,7 @@ namespace great
         {
             return;
         }
-        //if velocity interpolation is wanted,be sure enougn
+        //if velocity interpolation is wanted, be sure enough
         //derivative polynomials have been generated and stored
         vfac = (dna + dna) / dt[1];
         vc[2] = twot + twot;

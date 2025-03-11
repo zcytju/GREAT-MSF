@@ -484,23 +484,14 @@ int great::t_gpvtflt::_setCrd()
 
 bool great::t_gpvtflt::_valid_residual(bool phase_process, string sat_name, enum FREQ_SEQ &f, map<string, map<FREQ_SEQ, pair<int, int>>> &index_l)
 {
-    try
-    {
-        /* if no phase observable, psudorange is also unusable */
-        if (phase_process)
-        {
-            index_l.at(sat_name).at(_observ == OBSCOMBIN::IONO_FREE ? FREQ_1 : f).second;
-        }
-        else
-        {
-            index_l.at(sat_name).at(_observ == OBSCOMBIN::IONO_FREE ? FREQ_1 : f).second;
-            index_l.at(sat_name).at(_observ == OBSCOMBIN::IONO_FREE ? FREQ_1 : f).first;
-        }
-    }
-    catch (exception e)
-    {
+    auto sat_iter = index_l.find(sat_name);
+    if (sat_iter == index_l.end())
         return false;
-    }
+
+    auto freq_iter = sat_iter->second.find(_observ == OBSCOMBIN::IONO_FREE ? FREQ_1 : f);
+    if (freq_iter == sat_iter->second.end())
+        return false;
+
     return true;
 }
 

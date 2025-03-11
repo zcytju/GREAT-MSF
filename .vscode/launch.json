@@ -6,12 +6,15 @@
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/build/bin/GREAT_MSF",
+        //"program": "${workspaceFolder}/build/bin/GREAT_PVT",
         "args": [
             "-x",
             "${workspaceFolder}/sample_data/MSF_20201029/xml/GREAT_MSF_LCPPP_1029.xml"
+            //"${workspaceFolder}/sample_data/PPPFLT_2023305/xml/GREAT_PPPFLT.xml"
         ],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}/sample_data/MSF_20201029",
+        //"cwd": "${workspaceFolder}/sample_data/PPPFLT_2023305",
         "environment": [],
         "externalConsole": false,
         "MIMode": "gdb",

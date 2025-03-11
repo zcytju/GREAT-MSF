@@ -109,6 +109,7 @@ namespace gnut
         _mutex.unlock();
         return _consume;
     }
+    
     int t_rinexo::_decode_head()
     {
 

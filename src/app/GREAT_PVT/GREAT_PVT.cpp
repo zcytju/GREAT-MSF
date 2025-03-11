@@ -191,13 +191,13 @@ int main(int argc, char** argv)
 
     // add all data
     t_gallproc* data = new t_gallproc();
-    if (gobs)data->Add_Data(t_gdata::type2str(gobs->id_type()), gobs);
-    if (gorb)data->Add_Data(t_gdata::type2str(gorb->id_type()), gorb);
-    if (gobj)data->Add_Data(t_gdata::type2str(gobj->id_type()), gobj);
-    if (gbia)data->Add_Data(t_gdata::type2str(gbia->id_type()), gbia);
-    if (gotl)data->Add_Data(t_gdata::type2str(gotl->id_type()), gotl);
-    if (gde)data->Add_Data(t_gdata::type2str(gde->id_type()), gde);
-    if (gerp)data->Add_Data(t_gdata::type2str(gerp->id_type()), gerp);
+    if (gobs) data->Add_Data(t_gdata::type2str(gobs->id_type()), gobs);
+    if (gorb) data->Add_Data(t_gdata::type2str(gorb->id_type()), gorb);
+    if (gobj) data->Add_Data(t_gdata::type2str(gobj->id_type()), gobj);
+    if (gbia) data->Add_Data(t_gdata::type2str(gbia->id_type()), gbia);
+    if (gotl) data->Add_Data(t_gdata::type2str(gotl->id_type()), gotl);
+    if (gde) data->Add_Data(t_gdata::type2str(gde->id_type()), gde);
+    if (gerp) data->Add_Data(t_gdata::type2str(gerp->id_type()), gerp);
     if (gupd && dynamic_cast<t_gsetamb*>(&gset)->fix_mode() != FIX_MODE::NO && !isBase)
     {
         data->Add_Data(t_gdata::type2str(gupd->id_type()), gupd);
@@ -295,8 +295,7 @@ int main(int argc, char** argv)
     // Record the current time and the time spent
     auto tic_end = system_clock::now();
     auto duration = duration_cast<microseconds>(tic_end - tic_start);
-    cout << "Spent" << double(duration.count()) * microseconds::period::num / microseconds::period::den << " seconds." << endl;
+    cout << "Spent " << double(duration.count()) * microseconds::period::num / microseconds::period::den << " seconds." << endl;
 
     return 0;
 }
-
