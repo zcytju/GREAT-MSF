@@ -2,11 +2,14 @@
     "cmake.debugConfig": {
         "args": [
             "-x",
-            "xml/GREAT_MSF_TCPPP_1029.xml",
+            //"xml/GREAT_MSF_TCPPP_1029.xml",
+            "xml/GREAT_PPPFLT.xml",
         ],
-        "cwd": "${workspaceFolder}/sample_data/MSF_20201029"
+        //"cwd": "${workspaceFolder}/sample_data/MSF_20201029"
+        "cwd": "${workspaceFolder}/sample_data/PPPFLT_2023305"
     },
     "files.associations": {
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "stdexcept": "cpp"
     }
 }

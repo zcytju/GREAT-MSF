@@ -44,6 +44,7 @@ GREAT-MSF_1.0
 ## 安装和使用
 
 参见GREAT-MSF_1.0.pdf
+
 NOTE：
 1. 读取xml文件之前，确保各层配置参数缩进对齐；
 2. xml文件中的路径分隔符，linux系统下使用 / ，windows系统下使用 \\\\ ；建议在代码中使用正斜杠 / ，在 Windows 和 Linux 系统下都可以正常工作。

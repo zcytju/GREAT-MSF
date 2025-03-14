@@ -279,18 +279,18 @@ int main(int argc, char** argv)
     //Delete pointer
     for (size_t i = 0; i < gio.size(); ++i) { delete gio[i]; }; gio.clear();
     for (size_t i = 0; i < gcoder.size(); ++i) { delete gcoder[i]; }; gcoder.clear();
-    for (unsigned int i = 0; i < vgpvt.size(); ++i) { if (vgpvt[i])  delete vgpvt[i]; }
+    for (unsigned int i = 0; i < vgpvt.size(); ++i) { if (vgpvt[i]) delete vgpvt[i]; }
     if (gobs) delete gobs;
     if (gpcv) delete gpcv;
     if (gotl) delete gotl;
     if (gobj) delete gobj;
     if (gorb) delete gorb;
     if (gbia) delete gbia;
-    if (gde)  delete gde;
-    if (gerp)  delete gerp;
-    if (gupd)  delete gupd;
-    if (gifcb)  delete gifcb;
-    if (data)  delete data;
+    if (gde) delete gde;
+    if (gerp) delete gerp;
+    if (gupd) delete gupd;
+    if (gifcb) delete gifcb;
+    if (data) delete data;
 
     // Record the current time and the time spent
     auto tic_end = system_clock::now();

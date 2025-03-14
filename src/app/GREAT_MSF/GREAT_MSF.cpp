@@ -267,7 +267,7 @@ int main(int argc, char** argv)
         i++;
     }
 
-    for (unsigned int i = 0; i < vgmsf.size(); ++i) { if (vgmsf[i])  delete vgmsf[i]; }
+    for (unsigned int i = 0; i < vgmsf.size(); ++i) { if (vgmsf[i]) delete vgmsf[i]; }
 
     if (gobs) delete gobs;
     if (gpcv) delete gpcv;
@@ -275,11 +275,11 @@ int main(int argc, char** argv)
     if (gobj) delete gobj;
     if (gorb) delete gorb;
     if (gbia) delete gbia;
-    if (gde)  delete gde;
-    if (gerp)  delete gerp;
-    if (gupd)  delete gupd;
-    if (gifcb)  delete gifcb;
-    if (data)  delete data;
+    if (gde) delete gde;
+    if (gerp) delete gerp;
+    if (gupd) delete gupd;
+    if (gifcb) delete gifcb;
+    if (data) delete data;
     if (gimu) delete gimu;
 
     auto tic_end = system_clock::now();
