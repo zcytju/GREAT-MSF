@@ -47,8 +47,6 @@ message(STATUS " include path for ${LibGREAT} is : ${LibGREATSrc}")
 # for all the header files and source_files
 file(GLOB_RECURSE header_files ${PROJECT_SOURCE_DIR} *.h *.hpp)
 file(GLOB_RECURSE source_files ${PROJECT_SOURCE_DIR} *.cpp)
-file(GLOB_RECURSE header_files ${PROJECT_SOURCE_DIR} *.h *.hpp)
-file(GLOB_RECURSE source_files ${PROJECT_SOURCE_DIR} *.cpp)
 
 # grouping
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")

@@ -25,7 +25,7 @@ Second step, run the `ntrip_server_exam`:
 $ ./ntrip_server_exam
 ```
 
-Third step， run the `ntrip_client_exam`:
+Third step, run the `ntrip_client_exam`:
 ```bash
 $ ./ntrip_client_exam
 ```
